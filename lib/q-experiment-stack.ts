@@ -1,16 +1,27 @@
 import * as cdk from 'aws-cdk-lib';
+import { BitmapDashboard } from 'cdk-monitoring-constructs';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class QExperimentStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'QExperimentQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    new BitmapDashboard(this, 'Dashboard', {
+      dashboardName: 'my-dashboard',
+      defaultInterval: cdk.Duration.hours(6),
+    });
   }
 }
+
+// export class QExperimentStack extends cdk.Stack {
+//   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+//     super(scope, id, props);
+
+//     new MonitoringFacade(this, 'Facade', {
+//       alarmFactoryDefaults: {
+//         alarmNamePrefix: 'q-experiment',
+//         actionsEnabled: true,
+//       },
+//     });
+//   }
+// }
